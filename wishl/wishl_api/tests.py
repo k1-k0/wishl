@@ -10,25 +10,53 @@ class WishTestCase(TestCase):
             0
         )
 
-        Wish.objects.create(
-            title='glasses', description='Ray Ban', moneybox=Moneybox(10000), shop=Shop('Ray Ban')
-        )
+        ray_ban = Shop(name='Ray Ban', address='Moscow')
+        ray_ban.save()
 
-        Wish.objects.create(
-            title='laptop', description='Macbook Pro 16 2020', moneybox=Moneybox(200000), shop=Shop('Re:store')
+        tag_glasses = Tag(name="accessories")
+        tag_glasses.save()
+
+        m_glasses = Moneybox(10000)
+        m_glasses.save()
+
+        wish_1 = Wish(
+            name='glasses', description='Ray Ban', money=m_glasses, shop=ray_ban
         )
+        wish_1.save()
+        wish_1.tags.add(tag_glasses)
+        wish_1.save()
+
+
+        re_store = Shop(name='Re:store', address='SPB')
+        re_store.save()
+        m_laptop = Moneybox(200000)
+        m_laptop.save()
+
+        macbook = Wish(
+            name='laptop', description='Macbook Pro 16 2020', money=m_laptop, shop=re_store
+        )
+        macbook.save()
+
+        tag_comp = Tag(name="computers")
+        tag_comp.save()
+
+        macbook.tags.add(tag_comp)
+        macbook.save()
 
         self.assertEquals(
             Wish.objects.count(),
             2
         )
 
-        macbook = Wish.objects.get(id=2)
-        macbook.tag = Tag('computers')
+        tag_laptop = Tag(name='laptop')
+        tag_laptop.save()
+
+        macbook.tags.add(tag_laptop)
+        macbook.save()
 
         self.assertEquals(
-            macbook.tag.name,
-            'computers'
+            macbook.tags.all().count(),
+            2
         )
 
 
@@ -56,8 +84,8 @@ class ImageTestCase(TestCase):
             0
         )
 
-        Image.objects.create(path='dropbox: my_image')
-        Image.objects.create(path='dropbox: my_another_image')
+        Image.objects.create(url='dropbox: my_image')
+        Image.objects.create(url='dropbox: my_another_image')
 
         self.assertEquals(
             Image.objects.count(),
@@ -74,8 +102,8 @@ class MoneyboxTestCase(TestCase):
 
         Moneybox.objects.create(goal=1000, balance=1000)
         Moneybox.objects.create(goal=10000, balance=10000)
-        Moneybox.objects.create(100000)
-        Moneybox.objects.create(1000000)
+        Moneybox.objects.create(goal=100000, balance=0)
+        Moneybox.objects.create(goal=1000000, balance=0)
 
         self.assertEquals(
             Moneybox.objects.count(),
@@ -106,7 +134,7 @@ class MoneyboxTestCase(TestCase):
         )
 
         self.assertAlmostEquals(
-            moneybox.residue,
+            moneybox.residue(),
             90000
         )
 
@@ -118,7 +146,7 @@ class MoneyboxTestCase(TestCase):
         )
 
         self.assertAlmostEquals(
-            moneybox.residue,
+            moneybox.residue(),
             0
         )
 
