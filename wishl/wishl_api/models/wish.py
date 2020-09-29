@@ -11,5 +11,6 @@ class Wish(models.Model):
     description = models.TextField()
     money = models.ForeignKey(Moneybox, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
 

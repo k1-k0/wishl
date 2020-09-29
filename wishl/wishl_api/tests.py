@@ -19,8 +19,11 @@ class WishTestCase(TestCase):
         m_glasses = Moneybox(10000)
         m_glasses.save()
 
+        img = Image(url='google.com')
+        img.save()
+
         wish_1 = Wish(
-            name='glasses', description='Ray Ban', money=m_glasses, shop=ray_ban
+            name='glasses', description='Ray Ban', money=m_glasses, shop=ray_ban, image=img
         )
         wish_1.save()
         wish_1.tags.add(tag_glasses)
@@ -29,11 +32,15 @@ class WishTestCase(TestCase):
 
         re_store = Shop(name='Re:store', address='SPB')
         re_store.save()
+
         m_laptop = Moneybox(200000)
         m_laptop.save()
 
+        img_1 = Image(url='google.com')
+        img_1.save()
+
         macbook = Wish(
-            name='laptop', description='Macbook Pro 16 2020', money=m_laptop, shop=re_store
+            name='laptop', description='Macbook Pro 16 2020', money=m_laptop, shop=re_store, image=img_1
         )
         macbook.save()
 
