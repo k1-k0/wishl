@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from .moneybox import Moneybox
 from .shop import Shop
@@ -7,6 +8,7 @@ from .image import Image
 
 
 class Wish(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     description = models.TextField()
     money = models.ForeignKey(Moneybox, on_delete=models.CASCADE)

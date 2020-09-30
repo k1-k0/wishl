@@ -6,14 +6,10 @@ class Moneybox(models.Model):
     balance = models.PositiveIntegerField(default=0)
     goal = models.PositiveIntegerField(default=0)
 
-
-    def residue(self):
-        return self.goal - self.balance
-
     def push(self, value):
         if value and value > 0:
             self.balance += value
 
     def is_complete(self):
-        return self.balance  == self.goal
+        return self.balance == self.goal
 

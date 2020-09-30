@@ -8,9 +8,9 @@ verify_ssl = true
 [packages]
 django = "*"
 djangorestframework = "*"
-psycopg2 = "*"
 pylint = "*"
 jedi = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
