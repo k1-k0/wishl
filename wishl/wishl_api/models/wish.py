@@ -9,7 +9,7 @@ from .image import Image
 
 class Wish(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=150)
+    title = models.CharField(max_length=150)
     description = models.TextField()
     money = models.ForeignKey(Moneybox, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)

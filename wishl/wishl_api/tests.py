@@ -1,10 +1,14 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from .models import Wish, Tag, Image, Moneybox, Shop
 
 
 class WishTestCase(TestCase):
     def test_wish(self):
+
+        bob = User(username='bob', email='bob@gmail.com') 
+        bob.save()
         self.assertEquals(
             Wish.objects.count(),
             0
@@ -23,7 +27,7 @@ class WishTestCase(TestCase):
         img.save()
 
         wish_1 = Wish(
-            name='glasses', description='Ray Ban', money=m_glasses, shop=ray_ban, image=img
+            user=bob, title='glasses', description='Ray Ban', money=m_glasses, shop=ray_ban, image=img
         )
         wish_1.save()
         wish_1.tags.add(tag_glasses)
@@ -40,7 +44,7 @@ class WishTestCase(TestCase):
         img_1.save()
 
         macbook = Wish(
-            name='laptop', description='Macbook Pro 16 2020', money=m_laptop, shop=re_store, image=img_1
+            user=bob, title='laptop', description='Macbook Pro 16 2020', money=m_laptop, shop=re_store, image=img_1
         )
         macbook.save()
 
@@ -140,21 +144,11 @@ class MoneyboxTestCase(TestCase):
             False
         )
 
-        self.assertAlmostEquals(
-            moneybox.residue(),
-            90000
-        )
-
         moneybox.push(90000)
 
         self.assertEquals(
             moneybox.balance,
             100000
-        )
-
-        self.assertAlmostEquals(
-            moneybox.residue(),
-            0
         )
 
         self.assertEquals(
