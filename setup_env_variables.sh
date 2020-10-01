@@ -4,3 +4,4 @@ export WISHL_DB_USER=
 export WISHL_DB_PASS=
 export WISHL_DB_HOST=
 export WISHL_DB_PORT=
+export WISHL_TEST_DB=

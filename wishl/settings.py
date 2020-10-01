@@ -84,6 +84,9 @@ DATABASES = {
         'PASSWORD': os.getenv('WISHL_DB_PASS'),
         'HOST': os.getenv('WISHL_DB_HOST'),
         'PORT': os.getenv('WISHL_DB_PORT'),
+        'TEST': {
+            'NAME': os.getenv('WISHL_TEST_DB')
+        }
     }
 }
 
