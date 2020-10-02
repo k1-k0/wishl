@@ -1,0 +1,5 @@
+# Personal environment setup 
+setup_env_variables.sh
+
+# Python cache files
+*.py[cod]
