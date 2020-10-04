@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Moneybox(models.Model):
-    name = models.CharField(max_length=150)
     balance = models.PositiveIntegerField(default=0)
     goal = models.PositiveIntegerField(default=0)
 

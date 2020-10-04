@@ -13,9 +13,9 @@ class MoneyboxTests(APITestCase):
         """
         Prepare test data
         """
-        self.moneybox_1 = Moneybox.objects.create(name='a')
-        self.moneybox_2 = Moneybox.objects.create(name='b', goal=10000)
-        self.moneybox_3 = Moneybox.objects.create(name='b', goal=100000, balance=50000)
+        self.moneybox_1 = Moneybox.objects.create()
+        self.moneybox_2 = Moneybox.objects.create(goal=10000)
+        self.moneybox_3 = Moneybox.objects.create(goal=100000, balance=50000)
 
         self.user = User.objects.create_user(username='test_u', password='secret1')
         self.client.login(username='test_u', password='secret1')
@@ -25,7 +25,7 @@ class MoneyboxTests(APITestCase):
         Ensure that user can create own moneybox
         """
         url = reverse('moneybox-list')
-        data = {'name': 'test', 'goal': 250000}
+        data = {'goal': 250000}
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -37,7 +37,7 @@ class MoneyboxTests(APITestCase):
         """
         moneybox = Moneybox.objects.first()
         url = f'/moneyboxes/{moneybox.id}/'
-        data = {'name': 'test', 'goal': 200000, 'balance': 25000}
+        data = {'goal': 200000, 'balance': 25000}
         response = self.client.put(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
