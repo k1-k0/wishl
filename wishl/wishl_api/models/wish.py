@@ -10,9 +10,9 @@ from .image import Image
 class Wish(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     money = models.ForeignKey(Moneybox, on_delete=models.CASCADE)
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, null=True, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
 

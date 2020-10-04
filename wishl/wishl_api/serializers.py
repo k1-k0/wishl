@@ -5,33 +5,32 @@ from .models import (
 )
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
             'url', 'username', 'email'
         ]
 
-
-class WishSerializer(serializers.HyperlinkedModelSerializer):
+class WishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wish
-        fields = '__all__'
+        fields = ['user', 'title', 'money']
 
 
-class MoneyboxSerializer(serializers.HyperlinkedModelSerializer):
+class MoneyboxSerializer(serializers.ModelSerializer):
     class Meta:
         model = Moneybox
         fields = '__all__'
 
 
-class ShopSerializer(serializers.HyperlinkedModelSerializer):
+class ShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = '__all__'
 
 
-class ImageSerializer(serializers.HyperlinkedModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = '__all__'
