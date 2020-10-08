@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'wishl.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('WISHL_DB'),
-        'USER': os.getenv('WISHL_DB_USER'),
-        'PASSWORD': os.getenv('WISHL_DB_PASS'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('WISHL_DB_HOST'),
         'PORT': os.getenv('WISHL_DB_PORT'),
         'TEST': {
